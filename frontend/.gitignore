@@ -1,4 +1,4 @@
-# Logs
+﻿# Logs
 logs
 *.log
 npm-debug.log*
@@ -23,9 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Visual Studio temporary files
-.vs/
-
 # IDE
 .vs/
 .vscode/
@@ -34,3 +31,11 @@ dist-ssr
 # Системные
 Thumbs.db
 Desktop.ini
+
+# Игнорировать зависимости
+backend/node_modules/
+frontend/node_modules/
+
+#Личные данные
+backend/.env
+frontend/.env

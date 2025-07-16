@@ -1,33 +1,46 @@
-﻿require('dotenv').config();
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
+﻿// 1. Импорт необходимых библиотек
+require('dotenv').config(); // Для работы с .env файлом
+const express = require('express'); // Фреймворк для сервера
+const cors = require('cors'); // Чтобы фронтенд мог обращаться к бэкенду
+const vk = require('vk-io'); // Для работы с API ВКонтакте
 
+// 2. Создаем Express-приложение
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-const VK_API_VERSION = '5.131';
-const VK_API_URL = 'https://api.vk.com/method';
+// 3. Настройка middleware (промежуточное ПО)
+app.use(cors()); // Разрешаем запросы с других доменов
+app.use(express.json()); // Чтобы сервер понимал JSON-данные
 
-// Роут для отправки уведомлений
-app.post('/api/send-notification', async (req, res) => {
+// 4. Подключаем VK API
+const vkApi = new vk.VK({
+    token: process.env.VK_API_TOKEN // Токен из .env файла
+});
+
+// 5. Основной маршрут для проверки работы сервера
+app.get('/', (req, res) => {
+    res.send('Сервер работает! 🚀');
+});
+
+// 6. Маршрут для получения сообщений пользователя
+app.post('/api/messages', async (req, res) => {
     try {
-        const { userId, message } = req.body;
+        const { userId } = req.body; // ID пользователя из запроса
 
-        const response = await axios.post(`${VK_API_URL}/notifications.send`, {
-            user_ids: userId,
-            message: message,
-            access_token: process.env.VK_SERVICE_TOKEN,
-            v: VK_API_VERSION
+        // Получаем последние 200 сообщений пользователя
+        const messages = await vkApi.api.messages.getHistory({
+            user_id: userId,
+            count: 200,
         });
 
-        res.json(response.data);
+        res.json(messages); // Отправляем сообщения обратно
     } catch (error) {
-        console.error('Ошибка:', error.response.data);
-        res.status(500).json({ error: 'Не удалось отправить уведомление' });
+        console.error('Ошибка:', error);
+        res.status(500).json({ error: 'Не удалось получить сообщения' });
     }
 });
 
-const PORT = 3001;
-app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
+// 7. Запуск сервера
+const PORT = process.env.PORT || 3001; // Порт из .env или 3001
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}`);
+});

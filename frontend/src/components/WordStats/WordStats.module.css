@@ -1,0 +1,35 @@
+﻿.card {
+    margin: 16px 0;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.title {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.wordItem {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--vkui--color_field_border_alpha);
+}
+
+.wordText {
+    margin-bottom: 4px;
+}
+
+.progressContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progressBar {
+    flex-grow: 1;
+}
+
+.countText {
+    min-width: 70px;
+    text-align: right;
+    color: var(--vkui--color_text_secondary);
+}

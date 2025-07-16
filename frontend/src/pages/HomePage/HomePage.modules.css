@@ -1,0 +1,122 @@
+﻿/* Основной контейнер страницы */
+.page {
+    padding-bottom: 60px; /* Отступ для таббара */
+}
+
+/* Заголовок статистики */
+.statsHeader {
+    padding: 16px 16px 8px;
+    color: var(--text_secondary);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Карточка слова дня */
+.wordCard {
+    background: var(--background_content);
+    border-radius: 12px;
+    margin: 0 16px 16px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    animation: cardAppear 0.4s ease-out;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Главное слово */
+.word {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text_primary);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+/* Счетчик использования */
+.count {
+    font-size: 16px;
+    color: var(--text_secondary);
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/* Дата */
+.date {
+    font-size: 14px;
+    color: var(--text_secondary);
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* Кнопка обновления */
+.refreshButton {
+    margin: 0 16px;
+    background: var(--button_primary_background);
+    color: var(--button_primary_foreground);
+}
+
+    .refreshButton:hover {
+        opacity: 0.9;
+    }
+
+/* Состояние загрузки */
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+/* Сообщение об ошибке */
+.error {
+    color: var(--field_error_border);
+    text-align: center;
+    padding: 16px;
+    font-size: 15px;
+}
+
+/* Адаптация для темной темы */
+.vkui--dark .wordCard {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Анимация пульсации для заглушки */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.skeleton {
+    animation: pulse 1.5s ease-in-out infinite;
+    background: var(--background_highlighted);
+    border-radius: 8px;
+    height: 24px;
+    margin: 8px 0;
+}
+
+/* Медиа-запросы для планшетов */
+@media (min-width: 768px) {
+    .wordCard {
+        margin: 0 auto 24px;
+        max-width: 500px;
+    }
+
+    .refreshButton {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
