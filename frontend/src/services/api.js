@@ -1,11 +1,11 @@
 ﻿import axios from 'axios';
 
 // Базовый URL API (замените на ваш)
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+export const API_URL = 'http://localhost:3001/api/analyze';
 
 // Создаем экземпляр axios с базовыми настройками
 const api = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: API_URL,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

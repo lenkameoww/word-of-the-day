@@ -39,6 +39,26 @@ app.post('/api/messages', async (req, res) => {
     }
 });
 
+app.post('/api/analyze', async (req, res) => {
+    try {
+        const { userId, period = 'day' } = req.body;
+
+        // Получаем сообщения
+        const messages = await vkApi.api.messages.getHistory({
+            user_id: userId,
+            count: 200,
+            start_time: getTimePeriod(period) // Нужно реализовать эту функцию
+        });
+
+        // Анализируем и возвращаем результат
+        const result = analyzeMessages(messages.items);
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // 7. Запуск сервера
 const PORT = process.env.PORT || 3001; // Порт из .env или 3001
 app.listen(PORT, () => {

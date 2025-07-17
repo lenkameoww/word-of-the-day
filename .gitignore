@@ -1,0 +1,17 @@
+﻿# Общие исключения
+node_modules/
+.env
+.vs/
+.idea/
+*.log
+dist/
+dist-ssr/
+*.tmp
+
+# Фронтенд
+frontend/.svelte-kit/
+frontend/build/
+
+# Бэкенд
+backend/.npm
+backend/.cache
